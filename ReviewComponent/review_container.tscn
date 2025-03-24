@@ -1,0 +1,219 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1l2iq0wcnp2w"]
+
+[ext_resource type="Script" uid="uid://cwa083ip7uu3m" path="res://ReviewComponent/review_handler.gd" id="1_o61dd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skvju"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.75, 0.75, 0.75, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jh0kl"]
+bg_color = Color(0.85, 0.85, 0.85, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0.85, 0.85, 0.85, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uwqwk"]
+bg_color = Color(0.85, 0.85, 0.85, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0.85, 0.85, 0.85, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="ReviewContainer" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skvju")
+script = ExtResource("1_o61dd")
+
+[node name="HBCont" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SidePanelContainer" type="PanelContainer" parent="HBCont"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jh0kl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBCont/SidePanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ChatButton" type="Button" parent="HBCont/SidePanelContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = " Chatbot "
+
+[node name="FlashCardsButton" type="Button" parent="HBCont/SidePanelContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = " Flashcards "
+
+[node name="MockTestButton" type="Button" parent="HBCont/SidePanelContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = " Mock Test "
+
+[node name="SummaryButton" type="Button" parent="HBCont/SidePanelContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "Summary
+"
+
+[node name="ChatbotContainer" type="PanelContainer" parent="HBCont"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwqwk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBCont/ChatbotContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBCont/ChatbotContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="History" type="TextEdit" parent="HBCont/ChatbotContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+wrap_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBCont/ChatbotContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="UserInput" type="LineEdit" parent="HBCont/ChatbotContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBCont/ChatbotContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Send"
+
+[node name="FlashcardsContainer" type="PanelContainer" parent="HBCont"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwqwk")
+
+[node name="FlashcardsPlace" type="VBoxContainer" parent="HBCont/FlashcardsContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="GenerateFlashcardButton" type="Button" parent="HBCont/FlashcardsContainer/FlashcardsPlace"]
+layout_mode = 2
+text = "Generate New Question"
+
+[node name="MockExamContainer" type="PanelContainer" parent="HBCont"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwqwk")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBCont/MockExamContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBCont/MockExamContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_constants/separation = 24
+
+[node name="AmountOfQuestions" type="HBoxContainer" parent="HBCont/MockExamContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="HBCont/MockExamContainer/ScrollContainer/VBoxContainer/AmountOfQuestions"]
+layout_mode = 2
+text = "Number of Questions"
+
+[node name="HSlider" type="HSlider" parent="HBCont/MockExamContainer/ScrollContainer/VBoxContainer/AmountOfQuestions"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 3.0
+max_value = 30.0
+step = 3.0
+value = 12.0
+scrollable = false
+
+[node name="GenerateMockExamButton" type="Button" parent="HBCont/MockExamContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Generate Mock Exam"
+
+[node name="SubmitButton" type="Button" parent="HBCont/MockExamContainer/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Submit Answers"
+
+[node name="Feedback" type="Label" parent="HBCont/MockExamContainer/ScrollContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="NewMockExamButton" type="Button" parent="HBCont/MockExamContainer/ScrollContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "New Mock Exam"
+
+[node name="SummaryContainer" type="PanelContainer" parent="HBCont"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_uwqwk")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBCont/SummaryContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Summary" type="TextEdit" parent="HBCont/SummaryContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+wrap_mode = 1
+
+[node name="LessonsSelector" type="PanelContainer" parent="HBCont"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jh0kl")
+
+[node name="LessonsList" type="VBoxContainer" parent="HBCont/LessonsSelector"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ConfirmButton" type="Button" parent="HBCont/LessonsSelector/LessonsList"]
+layout_mode = 2
+text = "Confirm Selected Topics"
+
+[connection signal="pressed" from="HBCont/SidePanelContainer/VBoxContainer/ChatButton" to="." method="_on_chat_button_pressed"]
+[connection signal="pressed" from="HBCont/SidePanelContainer/VBoxContainer/FlashCardsButton" to="." method="_on_flash_cards_button_pressed"]
+[connection signal="pressed" from="HBCont/SidePanelContainer/VBoxContainer/MockTestButton" to="." method="_on_mock_test_button_pressed"]
+[connection signal="pressed" from="HBCont/SidePanelContainer/VBoxContainer/SummaryButton" to="." method="_on_summary_button_pressed"]
+[connection signal="text_submitted" from="HBCont/ChatbotContainer/VBoxContainer/HBoxContainer/UserInput" to="." method="_user_asked"]
+[connection signal="pressed" from="HBCont/ChatbotContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HBCont/FlashcardsContainer/FlashcardsPlace/GenerateFlashcardButton" to="." method="_on_generate_flashcard_button_pressed"]
+[connection signal="pressed" from="HBCont/MockExamContainer/ScrollContainer/VBoxContainer/GenerateMockExamButton" to="." method="_on_generate_mock_exam_button_pressed"]
+[connection signal="pressed" from="HBCont/MockExamContainer/ScrollContainer/VBoxContainer/NewMockExamButton" to="." method="_on_new_mock_exam_button_pressed"]

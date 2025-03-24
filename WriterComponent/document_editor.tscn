@@ -1,0 +1,154 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://WriterComponent/DocumentEditorHandler.gd" id="1_1vy7p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkyyj"]
+bg_color = Color(0.66, 0.66, 0.66, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r41na"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alq17"]
+bg_color = Color(0.9, 0.9, 0.9, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="DocumentEditor" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jkyyj")
+script = ExtResource("1_1vy7p")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="Top" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Top"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="FileButton" type="Button" parent="VBoxContainer/Top/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = " File "
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/Top/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = " Settings "
+
+[node name="ImportButton" type="Button" parent="VBoxContainer/Top/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = " Import "
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Top/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+selected = 0
+item_count = 2
+popup/item_0/text = "Viewing"
+popup/item_0/id = 1
+popup/item_1/text = "Editing"
+popup/item_1/id = 1
+
+[node name="EmptySpace" type="Label" parent="VBoxContainer/Top/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_r41na")
+text = "  "
+
+[node name="ReviewButton" type="Button" parent="VBoxContainer/Top/HBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = " Review "
+
+[node name="Bottom" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 3
+
+[node name="Contents" type="ScrollContainer" parent="VBoxContainer/Bottom"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+horizontal_scroll_mode = 3
+
+[node name="ContentsContainer" type="VBoxContainer" parent="VBoxContainer/Bottom/Contents"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Bottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="FormatContainer" type="ScrollContainer" parent="VBoxContainer/Bottom/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="DocumentFormatCotainer" type="HBoxContainer" parent="VBoxContainer/Bottom/VBoxContainer/FormatContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="BoldButton" type="Button" parent="VBoxContainer/Bottom/VBoxContainer/FormatContainer/DocumentFormatCotainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = " b "
+
+[node name="ItalicsButton" type="Button" parent="VBoxContainer/Bottom/VBoxContainer/FormatContainer/DocumentFormatCotainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = "  i  "
+
+[node name="UnderlineButton" type="Button" parent="VBoxContainer/Bottom/VBoxContainer/FormatContainer/DocumentFormatCotainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 12
+text = " u "
+
+[node name="DocumentScroll" type="ScrollContainer" parent="VBoxContainer/Bottom/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_alq17")
+follow_focus = true
+vertical_scroll_mode = 3
+
+[node name="DocumentContainer" type="VBoxContainer" parent="VBoxContainer/Bottom/VBoxContainer/DocumentScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="VBoxContainer/Top/HBoxContainer/ReviewButton" to="." method="_handle_review"]
+[connection signal="pressed" from="VBoxContainer/Bottom/VBoxContainer/FormatContainer/DocumentFormatCotainer/BoldButton" to="." method="_format_bold"]
+[connection signal="pressed" from="VBoxContainer/Bottom/VBoxContainer/FormatContainer/DocumentFormatCotainer/ItalicsButton" to="." method="_format_italics"]
+[connection signal="pressed" from="VBoxContainer/Bottom/VBoxContainer/FormatContainer/DocumentFormatCotainer/UnderlineButton" to="." method="_format_underline"]
+[connection signal="child_order_changed" from="VBoxContainer/Bottom/VBoxContainer/DocumentScroll/DocumentContainer" to="." method="_update_topic_numbers"]

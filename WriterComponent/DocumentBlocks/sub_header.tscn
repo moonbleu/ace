@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Components/TextHandlerComponent.gd" id="1_chqey"]
+[ext_resource type="Theme" path="res://Assets/ACE_Theme.tres" id="2_l881h"]
+[ext_resource type="FontFile" path="res://Assets/Roboto-Bold.ttf" id="3_tku5h"]
+[ext_resource type="FontFile" path="res://Assets/Roboto-Medium.ttf" id="4_3y7w5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pm7kl"]
+
+[node name="SubHeader" type="HBoxContainer" node_paths=PackedStringArray("empty_space", "topic_number", "edit", "rich_text")]
+offset_right = 1152.0
+offset_bottom = 43.0
+script = ExtResource("1_chqey")
+block_type = "SUB_HEADER"
+capitalize_text = true
+empty_space = NodePath("EmptySpace")
+topic_number = NodePath("TopicNumber")
+edit = NodePath("Edit")
+rich_text = NodePath("RichText")
+
+[node name="EmptySpace" type="Label" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pm7kl")
+text = "  "
+
+[node name="TopicNumber" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("2_l881h")
+theme_override_fonts/font = ExtResource("3_tku5h")
+theme_override_font_sizes/font_size = 12
+text = "X.X"
+
+[node name="Edit" type="TextEdit" parent="."]
+visible = false
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+theme = ExtResource("2_l881h")
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("4_3y7w5")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "SUB-HEADER NAME"
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="RichText" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 1
+mouse_default_cursor_shape = 1
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/normal_font = ExtResource("4_3y7w5")
+theme_override_fonts/mono_font = ExtResource("4_3y7w5")
+theme_override_fonts/italics_font = ExtResource("4_3y7w5")
+theme_override_fonts/bold_italics_font = ExtResource("4_3y7w5")
+theme_override_fonts/bold_font = ExtResource("4_3y7w5")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+text = "asd"
+fit_content = true
+
+[connection signal="focus_entered" from="Edit" to="." method="_on_edit_focus_entered"]
+[connection signal="focus_exited" from="Edit" to="." method="_on_edit_focus_exited"]
+[connection signal="focus_entered" from="RichText" to="." method="focus_on_edit"]

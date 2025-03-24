@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbygkgjc42u4t"]
+
+[ext_resource type="Script" uid="uid://bsma3bsccw3kw" path="res://ReviewComponent/answer_handler.gd" id="1_6igov"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6igov"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[node name="AnswerHandlerContainer" type="PanelContainer"]
+offset_top = 64.0
+offset_right = 100.0
+offset_bottom = 96.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_6igov")
+script = ExtResource("1_6igov")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(100, 48)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="GeneratingChoices" type="Label" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+text = "Generating Choices"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Answer1" type="CheckButton" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+autowrap_mode = 3
+
+[node name="Answer2" type="CheckButton" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+autowrap_mode = 3
+
+[node name="Answer3" type="CheckButton" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+autowrap_mode = 3
+
+[node name="Answer4" type="CheckButton" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+autowrap_mode = 3
+
+[node name="Feedback" type="Label" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="VBoxContainer/Answer1" to="." method="_on_answer_1_pressed"]
+[connection signal="pressed" from="VBoxContainer/Answer2" to="." method="_on_answer_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Answer3" to="." method="_on_answer_3_pressed"]
+[connection signal="pressed" from="VBoxContainer/Answer4" to="." method="_on_answer_4_pressed"]

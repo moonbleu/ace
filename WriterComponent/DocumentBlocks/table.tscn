@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://WriterComponent/DocumentBlocks/table.gd" id="1_10nqa"]
+
+[node name="Table" type="GridContainer"]
+offset_right = 1151.0
+offset_bottom = 80.0
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+script = ExtResource("1_10nqa")
+block_type = "TABLE"

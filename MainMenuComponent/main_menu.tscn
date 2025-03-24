@@ -1,0 +1,340 @@
+[gd_scene load_steps=13 format=3 uid="uid://w1tsqv6cblkf"]
+
+[ext_resource type="Script" uid="uid://npgmx5xkfurw" path="res://MainMenuComponent/SidePanelHandler.gd" id="1_kuro5"]
+[ext_resource type="Shader" uid="uid://dyfagun5oejus" path="res://Assets/dark_mode.gdshader" id="1_og0kt"]
+[ext_resource type="Shader" uid="uid://bvedpfub6vgvf" path="res://Assets/blue_light_filter.gdshader" id="3_qkm48"]
+[ext_resource type="Script" uid="uid://dqn37f5w3ix0g" path="res://MainMenuComponent/SettingsHandler.gd" id="4_ricod"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qiri"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.75, 0.75, 0.75, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsgrv"]
+bg_color = Color(0.85, 0.85, 0.85, 1)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(0.85, 0.85, 0.85, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qkm48"]
+shader = ExtResource("1_og0kt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ricod"]
+shader = ExtResource("3_qkm48")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wd1lj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ricod"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rl3i"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ricod"]
+
+[node name="MainMenu" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6qiri")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SidePanelContainer" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lsgrv")
+script = ExtResource("1_kuro5")
+
+[node name="DarkMode" type="ColorRect" parent="HBoxContainer/SidePanelContainer"]
+visible = false
+z_index = 4096
+material = SubResource("ShaderMaterial_qkm48")
+custom_minimum_size = Vector2(16384, 8192)
+layout_mode = 2
+
+[node name="BlueLightFilter" type="ColorRect" parent="HBoxContainer/SidePanelContainer"]
+visible = false
+z_index = 4096
+material = SubResource("ShaderMaterial_ricod")
+custom_minimum_size = Vector2(16384, 8192)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SidePanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="NewFileButton" type="Button" parent="HBoxContainer/SidePanelContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "New"
+
+[node name="ImportFileButton" type="Button" parent="HBoxContainer/SidePanelContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+text = "Import"
+
+[node name="NewFilePicker" type="FileDialog" parent="HBoxContainer/SidePanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+initial_position = 4
+size = Vector2i(560, 320)
+dialog_close_on_escape = false
+access = 2
+filters = PackedStringArray("*.tres;Godot Resource File")
+show_hidden_files = true
+
+[node name="ImportFilePicker" type="FileDialog" parent="HBoxContainer/SidePanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+title = "Open a File"
+initial_position = 4
+size = Vector2i(560, 320)
+ok_button_text = "Open"
+dialog_close_on_escape = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.tres;Godot Resource File")
+show_hidden_files = true
+
+[node name="EmptySpace" type="Label" parent="HBoxContainer/SidePanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wd1lj")
+text = "  "
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer/SidePanelContainer/VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+toggle_mode = true
+text = "Settings"
+
+[node name="FileSelectorContainer" type="PanelContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lsgrv")
+
+[node name="FileList" type="VBoxContainer" parent="HBoxContainer/FileSelectorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SettingsContainer" type="PanelContainer" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_lsgrv")
+script = ExtResource("4_ricod")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SettingsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ricod")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label3" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Visual"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Screen Filter/Mode"
+
+[node name="FilterOptionsButton" type="OptionButton" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Light Mode"
+popup/item_0/id = 0
+popup/item_1/text = "Dark Mode"
+popup/item_1/id = 1
+popup/item_2/text = "Blue Light Filter"
+popup/item_2/id = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Zoom / View Scale"
+
+[node name="ViewScaleSlider" type="HSlider" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.75
+max_value = 2.0
+step = 0.25
+value = 1.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5rl3i")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label3" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Models"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Language Model File"
+
+[node name="LMFileDialog" type="FileDialog" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+show_hidden_files = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="LMPathLabel" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.15, 0.15, 0.15, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ricod")
+text = "/path/to/model.gguf"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="LMButton" type="Button" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Select GGUF"
+alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Embedding Model File"
+
+[node name="EMFileDialog" type="FileDialog" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3"]
+auto_translate_mode = 1
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+show_hidden_files = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="EMPathLabel" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.15, 0.15, 0.15, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ricod")
+text = "/path/to/model.gguf"
+horizontal_alignment = 2
+vertical_alignment = 1
+text_overrun_behavior = 1
+
+[node name="EMButton" type="Button" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+text = "Select GGUF"
+alignment = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Restart Required!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="HBoxContainer/SidePanelContainer/VBoxContainer/NewFileButton" to="HBoxContainer/SidePanelContainer" method="_show_new_picker"]
+[connection signal="pressed" from="HBoxContainer/SidePanelContainer/VBoxContainer/ImportFileButton" to="HBoxContainer/SidePanelContainer" method="_show_import_picker"]
+[connection signal="file_selected" from="HBoxContainer/SidePanelContainer/VBoxContainer/NewFilePicker" to="HBoxContainer/SidePanelContainer" method="_new_document"]
+[connection signal="file_selected" from="HBoxContainer/SidePanelContainer/VBoxContainer/ImportFilePicker" to="HBoxContainer/SidePanelContainer" method="_load_document"]
+[connection signal="toggled" from="HBoxContainer/SidePanelContainer/VBoxContainer/SettingsButton" to="HBoxContainer/SidePanelContainer" method="_on_settings_button_toggled"]
+[connection signal="item_selected" from="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/FilterOptionsButton" to="HBoxContainer/SettingsContainer" method="_on_filter_options_button_item_selected"]
+[connection signal="drag_ended" from="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4/ViewScaleSlider" to="HBoxContainer/SettingsContainer" method="_on_view_scale_slider_drag_ended"]
+[connection signal="value_changed" from="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer4/ViewScaleSlider" to="HBoxContainer/SettingsContainer" method="_on_view_scale_slider_value_changed"]
+[connection signal="file_selected" from="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/LMFileDialog" to="HBoxContainer/SettingsContainer" method="_on_lm_file_dialog_file_selected"]
+[connection signal="pressed" from="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/HBoxContainer/LMButton" to="HBoxContainer/SettingsContainer" method="_on_lm_button_pressed"]
+[connection signal="file_selected" from="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/EMFileDialog" to="HBoxContainer/SettingsContainer" method="_on_em_file_dialog_file_selected"]
+[connection signal="pressed" from="HBoxContainer/SettingsContainer/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer3/HBoxContainer/EMButton" to="HBoxContainer/SettingsContainer" method="_on_em_button_pressed"]
